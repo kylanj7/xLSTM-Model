@@ -2,8 +2,8 @@ import os
 import pandas as pd
 
 # 📁 Paths
-raw_data_dir = r"G:\My Drive\TradingBot\Programming\Train Scripts (With Features)\HistoricalData\Sorted_data\Energy"
-clean_data_dir = r"G:\My Drive\TradingBot\Programming\Train Scripts (With Features)\HistoricalData\Sorted_data\Cleaned_Data\Energy_Clean"
+raw_data_dir = r"G:\My Drive\"
+clean_data_dir = r"G:\My Drive\"
 os.makedirs(clean_data_dir, exist_ok=True)
 
 # 🔢 Thresholds
@@ -61,3 +61,4 @@ if log_entries:
         for entry in log_entries:
             f.write(entry + "\n")
     print(f"\n🗒️ Skipped file log saved to: {skipped_log}")
+
