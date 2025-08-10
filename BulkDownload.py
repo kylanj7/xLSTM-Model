@@ -4,8 +4,8 @@ import os
 import time
 
 # Paths
-METADATA_PATH = r'G:\My Drive\TradingBot\Programming\Train Scripts (With Features)\HistoricalData\nasdaq_meta_data.csv'
-OUTPUT_DIR = r'G:\My Drive\TradingBot\Programming\Train Scripts (With Features)\HistoricalData\Sorted_data'
+METADATA_PATH = r'G:\My Drive\path'
+OUTPUT_DIR = r'G:\My Drive\path'
 
 # Load metadata
 df = pd.read_csv(METADATA_PATH)
@@ -52,3 +52,4 @@ with open(os.path.join(OUTPUT_DIR, "failed_tickers.txt"), 'w') as f:
         f.write(t + '\n')
 
 print(f"\n✅ Download complete. Success: {len(tickers_info) - len(failed_tickers)}, Failed: {len(failed_tickers)}")
+
