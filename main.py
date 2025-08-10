@@ -14,7 +14,7 @@ from backtest import simulate_trading, trading_metrics
 try:
     from config import DATA_DIR
 except ImportError:
-    DATA_DIR = r'G:\My Drive\TradingBot\Programming\Train Scripts (With Features)\HistoricalData\Sorted_data\Cleaned_Data\Tech_Clean'
+    DATA_DIR = r'G:\My Drive\path'
 
 class StockDataset(Dataset):
     def __init__(self, data, seq_length):
@@ -132,4 +132,5 @@ def main():
         print(f"  {key}: {value}")
 
 if __name__ == "__main__":
+
     main()
