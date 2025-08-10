@@ -4,8 +4,8 @@ import os
 import shutil
 
 # Define source and destination directories
-source_dir = r"G:\My Drive\TradingBot\Programming\Train Scripts (With Features)\HistoricalData\Sorted_data\Cleaned_Data\Tech_Clean"
-destination_dir = r"G:\My Drive\TradingBot\Programming\Train Scripts (With Features)\HistoricalData\Sorted_data\Cleaned_Data\Over_5M_Volume"
+source_dir = r"G:\My Drive\path"
+destination_dir = r"G:\My Drive\path"
 
 # Ensure the destination directory exists
 os.makedirs(destination_dir, exist_ok=True)
@@ -34,3 +34,4 @@ for file_path in csv_files:
         print(f"Moved {filename} to {destination_dir} (average = {avg_val})")
     else:
         print(f"File {file_path} not moved (average = {avg_val})")
+
