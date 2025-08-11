@@ -1,6 +1,10 @@
 # 📈 xLSTM Stock Price Forecasting & Backtesting
 
+⚠️ **DEVELOPMENT PHASE - NOT PRODUCTION READY** ⚠️
+
 A comprehensive Python project for stock market forecasting using enhanced xLSTM models with attention mechanisms, multi-scale convolutions, and advanced backtesting capabilities.
+
+> **Important Notice**: This model is currently in active development and experimental phases. It is **NOT** suitable for production deployment or real trading decisions. Use for research and educational purposes only.
 
 ## 🏗️ Project Structure
 
@@ -16,7 +20,36 @@ project/
 ├── automatetesting.py   # Automated testing framework with progress tracking
 ├── config.py            # Configuration and path management
 ├── change_log.txt       # Development history and optimizations
-└── requirements.txt     # Python dependencies
+├── requirements.txt     # Python dependencies
+├── HistoricalData/      # Data management and preprocessing pipeline
+│   ├── bulkdownload.py  # Bulk stock data download script
+│   ├── meta_data.csv    # Stock metadata and ticker information
+│   ├── debug/           # Debug files and logs
+│   ├── removesmalldata.py # Script to filter out low-volume data
+│   ├── testtickers.py   # Ticker validation and testing
+│   └── Sorted_data/     # Organized stock data by sector
+│       ├── {Sector1}/   # Individual sector folders (e.g., Technology, Healthcare)
+│       ├── {Sector2}/   # Each containing raw sorted stock data
+│       ├── {SectorN}/   # ...
+│       ├── cleandata.py # Data cleaning and preprocessing script
+│       ├── failed_tickers.txt # Log of failed ticker downloads
+│       ├── mrktvolfilter.py   # Market volume filtering utility
+│       ├── removesmalldata.py # Data size filtering script
+│       └── Cleaned_Data/      # Processed and cleaned datasets
+│           ├── Tech_Clean/    # Cleaned technology sector data
+│           ├── Healthcare_Clean/ # Cleaned healthcare sector data
+│           ├── Finance_Clean/ # Cleaned finance sector data
+│           └── {Sector}_Clean/ # Additional cleaned sector folders
+├── Models/              # Auto-created directory for saved models
+│   └── best_model_YYYYMMDD_HHMMSS.pth  # Timestamped model checkpoints
+├── Plots/               # Auto-created directory for visualizations
+│   ├── training_history_YYYYMMDD_HHMMSS.png
+│   ├── predictions_vs_actual_YYYYMMDD_HHMMSS.png
+│   ├── price_forecast_YYYYMMDD_HHMMSS.png
+│   └── prediction_error_distribution_YYYYMMDD_HHMMSS.png
+└── logs/                # Auto-created directory for performance tracking
+    ├── perf_metrics.txt # Text-based performance logs
+    └── perf_metrics.csv # CSV performance data for analysis
 ```
 
 ## 🚀 Key Features
@@ -178,3 +211,13 @@ MIT License - Feel free to use, modify, and distribute.
 ---
 
 *This project represents an advanced implementation of LSTM-based financial forecasting with production-ready features for research and trading strategy development.*
+
+## ⚠️ Disclaimer
+
+**This software is for educational and research purposes only.** 
+
+- The model is in **active development** and should not be used for actual trading decisions
+- Past performance does not guarantee future results
+- Stock market predictions are inherently uncertain and risky
+- Always consult with financial professionals before making investment decisions
+- The authors assume no responsibility for any financial losses incurred through use of this software
