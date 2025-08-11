@@ -2,7 +2,7 @@
 
 ⚠️ **DEVELOPMENT PHASE - NOT PRODUCTION READY** ⚠️
 
-A comprehensive Python project for stock market forecasting using enhanced xLSTM models with attention mechanisms, multi-scale convolutions, and advanced backtesting capabilities.
+A comprehensive Python project for stock market forecasting using an enhanced LSTM (xLSTM) model with attention mechanisms, multi-scale convolutions, and backtesting capabilities.
 
 > **Important Notice**: This model is currently in active development and experimental phases. It is **NOT** suitable for production deployment or real trading decisions. Use for research and educational purposes only.
 
