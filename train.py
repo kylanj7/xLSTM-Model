@@ -63,4 +63,3 @@ def train_model(model, train_loader, val_loader, device, learning_rate=0.001, ep
         model.load_state_dict(torch.load(best_model_path))
 
     return model, train_losses, val_losses
-
