@@ -9,12 +9,13 @@ from train import train_model
 from predict import predict
 from plot_utils import plot_training_history, plot_predictions_vs_actual
 from backtest import simulate_trading, trading_metrics
+import numpy as np
 
 # Import from config if it exists, otherwise use default paths
 try:
     from config import DATA_DIR
 except ImportError:
-    DATA_DIR = r'G:\My Drive\path'
+    DATA_DIR = r'G:\My Drive\TradingBot\Programming\Train Scripts (With Features)\HistoricalData\Sorted_data\Cleaned_Data\Tech_Clean'
 
 class StockDataset(Dataset):
     def __init__(self, data, seq_length):
@@ -62,6 +63,15 @@ def main():
     scaled_data, df_processed = preparer.prepare_data(full_df)
     print(f"Scaled data shape: {scaled_data.shape}")
 
+    # Find index of 'Close/Last' column
+    try:
+        close_idx = df_processed.columns.get_loc('Close/Last')
+        print(f"Close price column index: {close_idx}")
+    except KeyError:
+        print("Error: 'Close/Last' column not found in DataFrame")
+        print(f"Available columns: {df_processed.columns.tolist()}")
+        return
+
     # Set up dataset and dataloaders
     seq_length = 60
     print(f"Using sequence length: {seq_length}")
@@ -74,23 +84,28 @@ def main():
     print(f"Train data shape: {train_data.shape}")
     print(f"Test data shape: {test_data.shape}")
 
-    train_dataset = StockDataset(train_data, seq_length)
-    test_dataset = StockDataset(test_data, seq_length)
+    # Create full training dataset
+    full_train_dataset = StockDataset(train_data, seq_length)
     
-    # Split training data for validation
-    train_size = int(0.9 * len(train_dataset))
-    val_size = len(train_dataset) - train_size
-    print(f"Training dataset size: {train_size}")
-    print(f"Validation dataset size: {val_size}")
+    # Manually split into train and validation sets
+    train_dataset_size = int(0.9 * len(full_train_dataset))
+    val_dataset_size = len(full_train_dataset) - train_dataset_size
+    print(f"Training dataset size: {train_dataset_size}")
+    print(f"Validation dataset size: {val_dataset_size}")
     
-    train_dataset, val_dataset = torch.utils.data.random_split(
-        train_dataset,
-        [train_size, val_size]
-    )
-
-    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
+    # Generate indices and shuffle
+    indices = np.arange(len(full_train_dataset))
+    np.random.shuffle(indices)
+    train_indices = indices[:train_dataset_size]
+    val_indices = indices[train_dataset_size:]
+    
+    # Create subsets using Subset
+    train_dataset = torch.utils.data.Subset(full_train_dataset, train_indices)
+    val_dataset = torch.utils.data.Subset(full_train_dataset, val_indices)
+    
+    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=False)  # Shuffle done above
     val_loader = DataLoader(val_dataset, batch_size=32)
-    test_loader = DataLoader(test_dataset, batch_size=32)
+    test_loader = DataLoader(StockDataset(test_data, seq_length), batch_size=32)
 
     # Create model
     print("Creating model...")
@@ -109,9 +124,6 @@ def main():
     predictions, actuals = predict(model, test_loader, device)
     print(f"Predictions shape: {predictions.shape}")
     print(f"Actuals shape: {actuals.shape}")
-    
-    # Get closing price index (assuming it's the first column after date)
-    close_idx = 0  # Adjust this if your closing price is in a different column
     
     # Inverse transform to get actual prices
     pred_prices = preparer.scaler.inverse_transform(predictions)[:, close_idx]
@@ -132,5 +144,4 @@ def main():
         print(f"  {key}: {value}")
 
 if __name__ == "__main__":
-
     main()
