@@ -8,7 +8,6 @@ A comprehensive Python project for stock market forecasting using enhanced xLSTM
 
 ## 🏗️ Project Structure
 
-```
 project/
 ├── main.py              # Main orchestration script
 ├── model.py             # Enhanced xLSTM architecture with attention & convolutions
@@ -50,7 +49,6 @@ project/
 └── logs/                # Auto-created directory for performance tracking
     ├── perf_metrics.txt # Text-based performance logs
     └── perf_metrics.csv # CSV performance data for analysis
-```
 
 ## 🚀 Key Features
 
@@ -221,3 +219,4 @@ MIT License - Feel free to use, modify, and distribute.
 - Stock market predictions are inherently uncertain and risky
 - Always consult with financial professionals before making investment decisions
 - The authors assume no responsibility for any financial losses incurred through use of this software
+
