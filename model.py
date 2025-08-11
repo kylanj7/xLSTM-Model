@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 
 class xLSTM(nn.Module):
-    def __init__(self, input_size, hidden_size, num_layers, output_size, dropout=0.2):
+    def __init__(self, input_size, hidden_size, num_layers, output_size, dropout=0.3):
         super(xLSTM, self).__init__()
         self.hidden_size = hidden_size
         self.num_layers = num_layers
@@ -48,8 +48,10 @@ class xLSTM(nn.Module):
 
         combined = torch.cat([attended_out, pooled], dim=1)
         skip = self.skip_gate(combined)
+        # Apply skip gate to modulate attended_out
+        gated = attended_out * skip
 
-        gated = self.batch_norm1(attended_out)
+        gated = self.batch_norm1(gated)
         out = self.dropout(gated)
         out = self.relu(self.fc1(torch.cat([out, attended_out], dim=1)))
         out = self.batch_norm2(out)
