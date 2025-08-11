@@ -94,14 +94,14 @@ project/
 
 ## 📦 Installation
 
-```bash
+bash
 # Clone the repository
 git clone <your-repo-url>
 cd xlstm-stock-forecast
 
 # Install dependencies
 pip install -r requirements.txt
-```
+
 
 ### Dependencies
 - PyTorch (for deep learning)
@@ -114,16 +114,16 @@ pip install -r requirements.txt
 ## 🛠️ Usage
 
 ### Basic Training & Prediction
-```bash
+bash
 # Run complete pipeline (train, predict, plot, backtest)
 python main.py
-```
+
 
 ### Automated Testing
-```bash
+bash
 # Run multiple training sessions with performance tracking
 python automatetesting.py
-```
+
 
 ### Configuration
 Modify `config.py` to adjust:
@@ -135,7 +135,7 @@ Modify `config.py` to adjust:
 
 Current optimized settings based on testing:
 
-```python
+python
 # Model Architecture
 hidden_size = 256        # Increased from 128 for better capacity
 num_layers = 2          # Reduced from 3 for better gradient flow
@@ -147,7 +147,7 @@ epochs = 100            # Increased from 10 for convergence
 patience = 15           # Early stopping patience
 batch_size = 32         # Optimized batch size
 sequence_length = 60    # Days of historical data
-```
+
 
 ## 📊 Output Examples
 
@@ -162,12 +162,12 @@ sequence_length = 60    # Days of historical data
 - Buy/sell signal visualization
 
 ### Backtesting Performance
-```
+
 Trading performance metrics:
   Total Return %: 15.42
   Sharpe Ratio: 1.23
   Max Drawdown %: 8.45
-```
+
 
 ## 🔧 Recent Optimizations
 
@@ -219,4 +219,5 @@ MIT License - Feel free to use, modify, and distribute.
 - Stock market predictions are inherently uncertain and risky
 - Always consult with financial professionals before making investment decisions
 - The authors assume no responsibility for any financial losses incurred through use of this software
+
 
