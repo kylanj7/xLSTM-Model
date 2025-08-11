@@ -37,4 +37,3 @@ def trading_metrics(portfolio_value):
     total = (portfolio_value[-1] - portfolio_value[0]) / portfolio_value[0] * 100
     max_dd = np.max((np.maximum.accumulate(portfolio_value) - portfolio_value) / np.maximum.accumulate(portfolio_value)) * 100
     return {"Total Return %": total, "Sharpe Ratio": sharpe, "Max Drawdown %": max_dd}
-
