@@ -53,7 +53,7 @@ project/
 ## 🚀 Key Features
 
 ### Model Architecture
-- **Enhanced xLSTM** with attention mechanisms for temporal focus
+- **Extended LSTM (xLSTM)** with attention mechanisms for temporal focus
 - **Multi-scale convolutions** (3x3, 5x5, 7x7 kernels) for pattern detection
 - **Skip connections** with gating mechanisms
 - **Batch normalization** and dropout for regularization
