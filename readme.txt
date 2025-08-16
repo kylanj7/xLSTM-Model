@@ -128,8 +128,6 @@ python mrktvol5mfilter.py
 
 ### 4. Train Models
 
-### 4. Train Models
-
 ```bash
 # Train a single model
 python main.py
@@ -378,3 +376,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **⚠️ Remember**: Always test thoroughly with paper trading before using real money!
+
