@@ -70,21 +70,6 @@ HistoricalData/
 └── Fine_Tune_Data/        # Additional training data, user selected for fine tuning.
 ```
 
-### Live Trading System (`C:\users\user\Desktop\PaperTrade\`)
-```
-├── alpaca_main.py          # Main trading bot orchestrator
-├── alpaca_config.py        # API credentials and trading config
-├── alpaca_model.py         # Model definitions and utilities
-├── model_handler.py        # ML model loading and prediction
-├── alpaca_client.py        # Alpaca API integration
-├── trading_strategy.py     # Trading logic and risk management
-├── requirements.txt        # Dependencies
-├── Model/                  # Trained model storage
-│   └── best_model_*.pth    # Production model weights
-└── Scaler/                 # Data preprocessing artifacts
-    └── scaler.pkl          # Production data scalers
-```
-
 ## 🚀 Quick Start
 
 ### 1. Installation
@@ -376,4 +361,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **⚠️ Remember**: Always test thoroughly with paper trading before using real money!
+
 
