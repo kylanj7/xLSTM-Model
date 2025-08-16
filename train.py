@@ -6,7 +6,7 @@ import os
 from datetime import datetime
 from config import MODELS_DIR, get_timestamp  # import config constants
 
-def train_model(model, train_loader, val_loader, device, learning_rate=0.001, epochs=1, patience=15):
+def train_model(model, train_loader, val_loader, device, learning_rate=0.001, epochs=1, patience=5):
     optimizer = optim.Adam(model.parameters(), lr=learning_rate)
     criterion = nn.MSELoss()
 
@@ -63,3 +63,4 @@ def train_model(model, train_loader, val_loader, device, learning_rate=0.001, ep
         model.load_state_dict(torch.load(best_model_path))
 
     return model, train_losses, val_losses
+
