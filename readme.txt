@@ -355,9 +355,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - The quantitative finance community for research and insights
 
 ---
-
-**⚠️ Remember**: Always test thoroughly with paper trading before using real money!
-
-
-
-
