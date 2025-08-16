@@ -7,54 +7,105 @@ class xLSTM(nn.Module):
         self.hidden_size = hidden_size
         self.num_layers = num_layers
 
+        # Enhanced LSTM with layer normalization
         self.lstm = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True, dropout=dropout)
+        self.lstm_layer_norm = nn.LayerNorm(hidden_size)
+        
+        #  attention mechanism
         self.attention = nn.Sequential(
             nn.Linear(hidden_size, hidden_size // 2),
             nn.Tanh(),
-            nn.Linear(hidden_size // 2, 1),
-            nn.Softmax(dim=1)
+            nn.Dropout(dropout * 0.5),  # Lighter dropout for attention
+            nn.Linear(hidden_size // 2, 1)
         )
+        
+        # Multi-scale convolutions with proper normalization
         self.conv1 = nn.Conv1d(hidden_size, hidden_size // 2, kernel_size=3, padding=1)
         self.conv2 = nn.Conv1d(hidden_size, hidden_size // 2, kernel_size=5, padding=2)
         self.conv3 = nn.Conv1d(hidden_size, hidden_size // 2, kernel_size=7, padding=3)
-        self.skip_gate = nn.Sequential(
+        
+        # Batch normalization for conv layers
+        self.conv_bn1 = nn.BatchNorm1d(hidden_size // 2)
+        self.conv_bn2 = nn.BatchNorm1d(hidden_size // 2)
+        self.conv_bn3 = nn.BatchNorm1d(hidden_size // 2)
+        
+        # Enhanced gating mechanism
+        self.feature_gate = nn.Sequential(
             nn.Linear(hidden_size + (hidden_size // 2) * 3, hidden_size),
-            nn.Sigmoid()
+            nn.LayerNorm(hidden_size),  # Replace with LayerNorm for stability
+            nn.Tanh(),  # More stable than sigmoid
+            nn.Dropout(dropout * 0.5)
         )
-        self.batch_norm1 = nn.BatchNorm1d(hidden_size)
-        self.batch_norm2 = nn.BatchNorm1d(hidden_size)
-        self.dropout = nn.Dropout(dropout)
+        
+        # Residual connection preparation
+        self.residual_projection = nn.Linear(hidden_size, hidden_size)
+        
+        # Output layers with residual connections
         self.fc1 = nn.Linear(hidden_size * 2, hidden_size)
-        self.fc2 = nn.Linear(hidden_size, output_size)
-        self.relu = nn.ReLU()
+        self.fc1_norm = nn.LayerNorm(hidden_size)
+        self.fc2 = nn.Linear(hidden_size, hidden_size // 2)
+        self.fc2_norm = nn.LayerNorm(hidden_size // 2)
+        self.fc3 = nn.Linear(hidden_size // 2, output_size)
+        
+        self.dropout = nn.Dropout(dropout)
+        self.activation = nn.GELU()  # GELU often works better than ReLU
 
     def forward(self, x):
         batch_size = x.size(0)
         h0 = torch.zeros(self.num_layers, batch_size, self.hidden_size).to(x.device)
         c0 = torch.zeros(self.num_layers, batch_size, self.hidden_size).to(x.device)
 
+        # LSTM with layer normalization
         lstm_out, _ = self.lstm(x, (h0, c0))
+        lstm_out = self.lstm_layer_norm(lstm_out)
+
+        #  attention with proper normalization
         attention_weights = self.attention(lstm_out)
+        attention_weights = torch.softmax(attention_weights, dim=1)
         attended_out = torch.sum(lstm_out * attention_weights, dim=1)
 
+        # Enhanced multi-scale convolutions
         lstm_out_transposed = lstm_out.transpose(1, 2)
-        conv1_out = self.conv1(lstm_out_transposed)
-        conv2_out = self.conv2(lstm_out_transposed)
-        conv3_out = self.conv3(lstm_out_transposed)
+        
+        conv1_out = self.activation(self.conv_bn1(self.conv1(lstm_out_transposed)))
+        conv2_out = self.activation(self.conv_bn2(self.conv2(lstm_out_transposed)))
+        conv3_out = self.activation(self.conv_bn3(self.conv3(lstm_out_transposed)))
 
-        multi_scale = torch.cat([conv1_out, conv2_out, conv3_out], dim=1)
-        multi_scale = multi_scale.transpose(1, 2)
-        pooled = torch.max(multi_scale, dim=1)[0]
+        # Global max pooling for each conv output
+        conv1_pooled = torch.max(conv1_out, dim=2)[0]
+        conv2_pooled = torch.max(conv2_out, dim=2)[0]
+        conv3_pooled = torch.max(conv3_out, dim=2)[0]
+        
+        multi_scale = torch.cat([conv1_pooled, conv2_pooled, conv3_pooled], dim=1)
 
-        combined = torch.cat([attended_out, pooled], dim=1)
-        skip = self.skip_gate(combined)
-        # Apply skip gate to modulate attended_out
-        gated = attended_out * skip
+        # Enhanced feature gating
+        combined_features = torch.cat([attended_out, multi_scale], dim=1)
+        gate_output = self.feature_gate(combined_features)
+        
+        # Residual connection
+        residual = self.residual_projection(attended_out)
+        gated_output = gate_output + residual  # Residual connection for stability
 
-        gated = self.batch_norm1(gated)
-        out = self.dropout(gated)
-        out = self.relu(self.fc1(torch.cat([out, attended_out], dim=1)))
-        out = self.batch_norm2(out)
-        out = self.dropout(out)
-        out = self.fc2(out)
-        return out
+        # Enhanced output processing
+        out = torch.cat([gated_output, attended_out], dim=1)
+        
+        # First FC layer with residual connection
+        fc1_out = self.fc1(out)
+        fc1_out = self.fc1_norm(fc1_out)
+        fc1_out = self.activation(fc1_out)
+        fc1_out = self.dropout(fc1_out)
+        
+        # Add residual connection if dimensions match
+        if fc1_out.size(1) == gated_output.size(1):
+            fc1_out = fc1_out + gated_output
+        
+        # Second FC layer
+        fc2_out = self.fc2(fc1_out)
+        fc2_out = self.fc2_norm(fc2_out)
+        fc2_out = self.activation(fc2_out)
+        fc2_out = self.dropout(fc2_out)
+        
+        # Final output
+        output = self.fc3(fc2_out)
+        
+        return output
