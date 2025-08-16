@@ -3,19 +3,23 @@ from torch.utils.data import DataLoader, Dataset
 import pandas as pd
 import glob
 import os
+import numpy as np
+import pickle
 from data_prep import DataPreparer
 from model import xLSTM
 from train import train_model
 from predict import predict
 from plot_utils import plot_training_history, plot_predictions_vs_actual
 from backtest import simulate_trading, trading_metrics
-import numpy as np
 
 # Import from config if it exists, otherwise use default paths
 try:
     from config import DATA_DIR
 except ImportError:
-    DATA_DIR = r'G:\My Drive\TradingBot\Programming\Train Scripts (With Features)\HistoricalData\Sorted_data\Cleaned_Data\Tech_Clean'
+    DATA_DIR = r'C:\Users\Kylan\Desktop\xLSTMmodel\HistoricalData\Sorted_data\Cleaned_Data\Tech_Clean'
+
+# Load model from Models directory for fine-tuning
+# model.load_state_dict(torch.load(r"C:\Users\Kylan\Desktop\xLSTMmodel\Models\best_model_20250809_231345.pth", map_location=device))
 
 class StockDataset(Dataset):
     def __init__(self, data, seq_length):
@@ -114,10 +118,25 @@ def main():
     model = xLSTM(input_size=input_size, hidden_size=128, num_layers=3, output_size=input_size)
     model.to(device)
 
+    # model.load_state_dict(torch.load(r"C:\Users\Kylan\Desktop\xLSTMmodel\Models\best_model_20250809_231345.pth", map_location=device))
+
     # Train
     print("Starting training...")
     model, train_losses, val_losses = train_model(model, train_loader, val_loader, device)
     plot_training_history(train_losses, val_losses)
+
+    scaler_dir = r'C:\Users\Kylan\Desktop\xLSTMmodel\Scalers'
+    os.makedirs(scaler_dir, exist_ok=True)
+    scaler_data = {
+        'scaler': preparer.scaler,
+        'features': df_processed.columns.tolist(),
+        'close_idx': close_idx,
+        'seq_length': seq_length
+    }
+    scaler_path = os.path.join(scaler_dir, 'scaler.pkl')
+    with open(scaler_path, 'wb') as f:
+        pickle.dump(scaler_data, f)
+    print(f"Scaler saved to: {scaler_path}")
 
     # Predict
     print("Making predictions...")
