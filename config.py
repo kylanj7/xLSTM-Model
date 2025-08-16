@@ -5,7 +5,8 @@ from datetime import datetime
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Folder paths
-DATA_DIR = r"G:\My Drive\TradingBot\Programming\Train Scripts (With Features)\HistoricalData\Sorted_data\Cleaned_Data\Tech_Clean"
+DATA_DIR = r"C:\Users\Kylan\Desktop\xLSTMmodel\HistoricalData\Sorted_data\Cleaned_Data\Tech_Clean" # <---Use this to train a new model
+#DATA_DIR = r"" # <---Use this to fine tune a model on new data
 MODELS_DIR = os.path.join(BASE_DIR, 'Models')
 PLOTS_DIR = os.path.join(BASE_DIR, 'Plots')
 
