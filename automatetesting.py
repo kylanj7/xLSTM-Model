@@ -10,8 +10,8 @@ from tqdm import tqdm
 class AutomatedTester:
     def __init__(self, num_runs=5):
         self.num_runs = num_runs
-        self.txt_log_file = r"G:\My Drive\TradingBot\Programming\Train Scripts (With Features)\logs\perf_metrics.txt"
-        self.csv_log_file = r"G:\My Drive\TradingBot\Programming\Train Scripts (With Features)\logs\perf_metrics.csv"
+        self.txt_log_file = r"C:\Users\Kylan\Desktop\xLSTMmodel\logs\perf_metrics.txt"
+        self.csv_log_file = r"C:\Users\Kylan\Desktop\xLSTMmodel\logs\perf_metrics.csv"
         
     def extract_metrics(self, output):
         metrics = {}
@@ -206,7 +206,7 @@ class AutomatedTester:
         print(f"Successful runs: {successful_runs}/{self.num_runs}")
 
 if __name__ == "__main__":
-    NUM_RUNS = 1
+    NUM_RUNS = 5
     
     if not os.path.exists("main.py"):
         print("Error: main.py not found!")
