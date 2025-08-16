@@ -2,7 +2,7 @@
 
 ⚠️ **DEVELOPMENT PHASE - NOT PRODUCTION READY** ⚠️
 
-An xLSTM model training pipeline that combines a custom xLSTM (Extended Long Short-Term Memory) neural network with historical market data to execute automated trading strategies through the Alpaca API.
+A training pipeline that combines a custom xLSTM (Extended Long Short-Term Memory) neural network with historical market data to execute automated trading strategies through the Alpaca API.
 
 ## 🎯 Features
 
@@ -357,6 +357,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **⚠️ Remember**: Always test thoroughly with paper trading before using real money!
+
 
 
 
