@@ -2,7 +2,7 @@
 
 ⚠️ **DEVELOPMENT PHASE - NOT PRODUCTION READY** ⚠️
 
-An advanced AI-powered trading bot that combines a custom xLSTM (Extended Long Short-Term Memory) neural network with historical market data to execute automated trading strategies through the Alpaca API.
+An xLSTM model training pipeline that combines a custom xLSTM (Extended Long Short-Term Memory) neural network with historical market data to execute automated trading strategies through the Alpaca API.
 
 ## 🎯 Features
 
@@ -334,11 +334,7 @@ The model expects CSV files with the following columns:
 1. **Performance Analysis**: Review trading logs and metrics
 2. **Model Retraining**: Periodically retrain on new market data
 3. **Strategy Optimization**: Adjust risk parameters based on performance
-4. **Data Updates**: Refresh historical data and sector classifications
-
-## 🚨 Disclaimer
-
-This trading bot is for educational and research purposes. Trading involves substantial risk of loss and is not suitable for all investors. Past performance does not guarantee future results. Use at your own risk and consider paper trading before deploying with real money.
+4. **Data Updates**: Refresh historical data and sector classification
 
 ## 🤝 Contributing
 
@@ -361,5 +357,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **⚠️ Remember**: Always test thoroughly with paper trading before using real money!
+
 
 
