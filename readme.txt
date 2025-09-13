@@ -1,6 +1,6 @@
 # xLSTM Trading Bot 
 
-⚠**DEVELOPMENT PHASE - NOT PRODUCTION READY** 
+**DEVELOPMENT PHASE - NOT PRODUCTION READY** 
 
 A training pipeline that combines a custom xLSTM (Extended Long Short-Term Memory) neural network with historical market data to execute automated trading strategies through the Alpaca API.
 
@@ -355,6 +355,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - The quantitative finance community for research and insights
 
 ---
+
 
 
 
