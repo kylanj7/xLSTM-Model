@@ -262,7 +262,7 @@ matplotlib>=3.4.0
 - **Error Handling**: Comprehensive error logging and recovery
 - **Account Monitoring**: Real-time balance and position tracking
 
-## 📊 Data Requirements & Processing
+## Data Requirements & Processing
 
 ### Raw Data Collection
 
@@ -355,5 +355,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - The quantitative finance community for research and insights
 
 ---
+
 
 
