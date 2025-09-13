@@ -1,6 +1,6 @@
-# xLSTM Trading Bot 🚀
+# xLSTM Trading Bot 
 
-⚠️ **DEVELOPMENT PHASE - NOT PRODUCTION READY** ⚠️
+⚠**DEVELOPMENT PHASE - NOT PRODUCTION READY** 
 
 A training pipeline that combines a custom xLSTM (Extended Long Short-Term Memory) neural network with historical market data to execute automated trading strategies through the Alpaca API.
 
@@ -12,7 +12,7 @@ A training pipeline that combines a custom xLSTM (Extended Long Short-Term Memor
 - **Model Performance Tracking**: Automated testing and model ranking system
 - **Live Market Integration**: Real-time data fetching and market hours detection
 
-## 🏗️ Project Structure
+## Project Structure
 
 ### Training System (`C:\users\user\Desktop\xLSTMtraining\`)
 ```
@@ -70,7 +70,7 @@ HistoricalData/
 └── Fine_Tune_Data/        # Additional training data, user selected for fine tuning.
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Installation
 
@@ -133,7 +133,7 @@ cd C:\users\user\Desktop\PaperTrade\
 python alpaca_main.py
 ```
 
-## 🧠 xLSTM Architecture
+## xLSTM Architecture
 
 Our enhanced LSTM model features:
 
@@ -166,7 +166,7 @@ This will:
 - Rank models by performance metrics
 - Generate detailed performance logs
 
-## 💹 Trading Strategy
+## Trading Strategy
 
 ### Risk Management Features
 
@@ -184,7 +184,7 @@ The bot uses the xLSTM model to predict future price movements and generates tra
 - Risk parameters
 - Position management rules
 
-## 📈 Backtesting & Performance
+## Backtesting & Performance
 
 ### Key Metrics Tracked
 
@@ -204,7 +204,7 @@ python backtest.py
 python plot_utils.py
 ```
 
-## 🔧 Configuration Options
+## Configuration Options
 
 ### Trading Parameters
 
@@ -226,7 +226,7 @@ dropout = 0.3
 sequence_length = 60  # 60 time steps for prediction
 ```
 
-## 📋 Requirements
+## Requirements
 
 ```
 alpaca-trade-api>=3.1.1
@@ -237,7 +237,7 @@ torch>=1.12.0
 matplotlib>=3.4.0
 ```
 
-## 🛠️ Data Processing Tools
+## Data Processing Tools
 
 ### Bulk Data Download
 - **BulkDownload.py**: Downloads 5-year historical data for all NASDAQ stocks
@@ -312,7 +312,7 @@ The model expects CSV files with the following columns:
 - **Volume Threshold**: 5M+ average volume for liquidity
 - **Sector Classification**: Organized by NASDAQ sector categories
 
-## 🔄 Complete Workflow
+## Complete Workflow
 
 ### Training Phase
 1. **Data Collection**: Download 5-year NASDAQ historical data using `BulkDownload.py`
@@ -336,7 +336,7 @@ The model expects CSV files with the following columns:
 3. **Strategy Optimization**: Adjust risk parameters based on performance
 4. **Data Updates**: Refresh historical data and sector classification
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -344,14 +344,15 @@ The model expects CSV files with the following columns:
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Alpaca Markets for their excellent trading API
 - PyTorch team for the deep learning framework
 - The quantitative finance community for research and insights
 
 ---
+
