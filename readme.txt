@@ -4,7 +4,7 @@
 
 A training pipeline that combines a custom xLSTM (Extended Long Short-Term Memory) neural network with historical market data to execute automated trading strategies through the Alpaca API.
 
-## 🎯 Features
+## Features
 
 - **Custom xLSTM Architecture**: Enhanced LSTM with attention mechanisms, multi-scale convolutions, and residual connections
 - **Risk Management**: Stop-loss, take-profit, position sizing, and daily trade limits
@@ -355,4 +355,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - The quantitative finance community for research and insights
 
 ---
+
 
