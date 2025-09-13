@@ -143,7 +143,7 @@ Our enhanced LSTM model features:
 - **Residual Connections**: Better gradient flow and training
 - **Feature Gating**: Intelligent feature selection
 
-## 📊 Model Training
+## Model Training
 
 ### Train a New Model
 
@@ -355,6 +355,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - The quantitative finance community for research and insights
 
 ---
+
 
 
 
