@@ -5,8 +5,7 @@ from datetime import datetime
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Folder paths
-DATA_DIR = r"C:\Users\Kylan\Desktop\xLSTMmodel\HistoricalData\Sorted_data\Cleaned_Data\Tech_Clean" # <---Use this to train a new model
-#DATA_DIR = r"" # <---Use this to fine tune a model on new data
+DATA_DIR = r"C:\Users\Kylan\Desktop\xLSTMmodel\HistoricalData\Sorted_data\Cleaned_Data\Tech_Clean" 
 MODELS_DIR = os.path.join(BASE_DIR, 'Models')
 PLOTS_DIR = os.path.join(BASE_DIR, 'Plots')
 
@@ -16,3 +15,4 @@ os.makedirs(PLOTS_DIR, exist_ok=True)
 
 def get_timestamp():
     return datetime.now().strftime('%Y%m%d_%H%M%S')
+
