@@ -2,7 +2,7 @@
 
 **DEVELOPMENT PHASE - NOT PRODUCTION READY** 
 
-A training pipeline that combines a custom xLSTM (Extended Long Short-Term Memory) neural network with historical market data to execute automated trading strategies through the Alpaca API.
+A comprehensive training framework that integrates a custom xLSTM (Extended Long Short-Term Memory) neural network with historical NASDAQ market data to visualize stock price predictions using Matplotlib. The pipeline features automatic data acquisition for NASDAQ tickers with metadata, robust data cleaning utilities for handling incomplete datasets, and automated testing scripts for efficient model training and evaluation. Comprehensive plotting.
 
 ## Features
 
@@ -355,6 +355,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - The quantitative finance community for research and insights
 
 ---
+
 
 
 
